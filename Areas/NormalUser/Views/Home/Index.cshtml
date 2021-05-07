@@ -1,4 +1,6 @@
 ﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 
 @{
@@ -9,6 +11,7 @@
     <h1 class="display-4">Welcome</h1>
     @if (User.Identity.IsAuthenticated)
     {
-        <h3>@User.FindFirstValue("City")</h3>
+        <h4>NAME : </h4><h3>@UserManager.GetUserAsync(User).Result.NameUSER</h3>
+        <h4>CITY : </h4><h3>@UserManager.GetUserAsync(User).Result.City</h3>
     }
 </div>
