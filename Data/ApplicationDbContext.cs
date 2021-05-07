@@ -15,5 +15,7 @@ namespace UserIdentity.Data
         }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<UserImage> UserImages { get; set; }
     }
 }

@@ -8,7 +8,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using UserIdentity.Models;
+using System.IO;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace UserIdentity.Controllers
 {
@@ -26,11 +28,40 @@ namespace UserIdentity.Controllers
             _logger = logger;
         }
 
-        public  IActionResult Index()
+        public IActionResult Index()
         {
             Console.WriteLine(_userManager.GetUserAsync(User).Result.NameUSER);
             return View();
         }
+
+        [HttpPost]
+        public IActionResult FormPost()
+        {
+            var filePath = @"D:\.NET projects\UserIdentity\wwwroot\UploadedImg.jpg";
+            FileStream fs;
+            try
+            {
+                IFormFile formFile = Request.Form.Files[0];
+                fs = new FileStream(filePath, FileMode.Create);
+                formFile.CopyTo(fs);
+                fs.Close();
+
+                return Json(new
+                {
+                    success = true
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    success = false,
+                    errorMessage = ex.Message
+                });
+            }
+            
+        }
+
 
         public IActionResult Privacy()
         {

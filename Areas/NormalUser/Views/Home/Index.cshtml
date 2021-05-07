@@ -7,6 +7,15 @@
     ViewData["Title"] = "Home Page";
 }
 
+<div>
+    
+        <input name="FileUpload" id="fileToUpload" type="file" placeholder="Choose File" />
+        <br /><br />
+        <input type="button" onclick="uploadFile()" value="send" />
+    
+</div>
+
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     @if (User.Identity.IsAuthenticated)
@@ -15,3 +24,7 @@
         <h4>CITY : </h4><h3>@UserManager.GetUserAsync(User).Result.City</h3>
     }
 </div>
+
+@section Scripts {
+    <script src="~/js/index.js" defer></script>
+}
